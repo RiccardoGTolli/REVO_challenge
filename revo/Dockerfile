@@ -1,17 +1,15 @@
 FROM python:3.9-slim-buster as production
 
+USER root
+
+# Install some basic packages
 RUN apt-get update && apt-get install -y \
     gcc python3-dev \
     git
 
-# Create user with non-root privileges
-ARG UID=1001
-ARG GID=1002
+WORKDIR /revo
 
 ENV PYTHONPATH="${PYTHONPATH}:/revo/"
-
-RUN mkdir revo
-WORKDIR /revo
 
 COPY ./revo /revo
 
@@ -22,18 +20,17 @@ COPY ./entry_scripts/production.sh /revo/entry_scripts/production.sh
 RUN chmod +x -R ./entry_scripts
 
 # Show service name in bash prompt
-RUN echo 'PS1="\e[0;31m[revo]\e[m $PS1"' >> /home/adsp/.bashrc
+RUN echo 'PS1="\e[0;31m[revo]\e[m $PS1"' >> /home/riccardo/.bashrc
 
 ENTRYPOINT ["/bin/sh", "-c", "/revo/entry_scripts/production.sh"]
 
 # Multi-stage build
 FROM production as development
-USER root
 
 RUN mkdir /revo/notebooks /revo/static_test
 COPY ./revo/notebooks /revo/notebooks
 COPY ./revo/requirements_dev.txt /revo/requirements_dev.txt
-COPY ./static_test/bash_aliases.txt /home/user/.bash_aliases
+COPY ./static_test/bash_aliases.txt /home/riccardo/.bash_aliases
 COPY ./static_test /revo/static_test
 
 RUN pip install -r /src/requirements/requirements_dev.txt
