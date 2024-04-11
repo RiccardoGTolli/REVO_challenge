@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  revo:
+    build:
+      args: 
+        - UID=$UID
+        - GID=$GID
+      context: ./
+      dockerfile: ./app/Dockerfile
+      target: development
+    tty: true # docker run -t
+    stdin_open: true # docker run -i
+    volumes:
+      - ./common/static_test/:/src/static_test
+      - ./app/modules/:/src/python_code/modules
+      - ./common/common_modules/:/src/python_code/common_modules
+      - ./app/notebooks/:/src/notebooks
+    ports:
+      - $JUPYTER_PORT_APP:8888
+    env_file:
+      - ./.env
+
+  relationaldb:
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      restart: always
+      environment:
+        - MSSQL_USER=$MSSQL_USER
+        - SA_PASSWORD=$SA_PASSWORD
+        - ACCEPT_EULA=Y
+      ports:
+        - 1433:1433
+      volumes: 
+        - relationaldb:/var/lib/mssql/data
+
+volumes:
+  relationaldb:
