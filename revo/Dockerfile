@@ -11,7 +11,10 @@ WORKDIR /revo
 
 ENV PYTHONPATH="${PYTHONPATH}:/revo/"
 
-COPY ./revo /revo
+COPY ./revo/data /revo/data
+COPY ./revo/dimension /revo/dimension
+COPY ./revo/modules /revo/modules
+COPY ./revo/requirements.txt /revo/requirements.txt 
 
 RUN pip install --upgrade pip
 RUN pip install -r /revo/requirements.txt
@@ -20,7 +23,7 @@ COPY ./entry_scripts/production.sh /revo/entry_scripts/production.sh
 RUN chmod +x -R ./entry_scripts
 
 # Show service name in bash prompt
-RUN echo 'PS1="\e[0;31m[revo]\e[m $PS1"' >> /home/riccardo/.bashrc
+RUN echo 'PS1="\e[0;31m[revo]\e[m $PS1"' >> /root/.bashrc
 
 ENTRYPOINT ["/bin/sh", "-c", "/revo/entry_scripts/production.sh"]
 
@@ -30,12 +33,12 @@ FROM production as development
 RUN mkdir /revo/notebooks /revo/static_test
 COPY ./revo/notebooks /revo/notebooks
 COPY ./revo/requirements_dev.txt /revo/requirements_dev.txt
-COPY ./static_test/bash_aliases.txt /home/riccardo/.bash_aliases
+COPY ./static_test/bash_aliases.txt /root/.bash_aliases
 COPY ./static_test /revo/static_test
 
-RUN pip install -r /src/requirements/requirements_dev.txt
-COPY ./entry_scripts/development.sh /src/entry_scripts/development.sh
+RUN pip install -r /revo/requirements_dev.txt
+COPY ./entry_scripts/development.sh /revo/entry_scripts/development.sh
 RUN chmod +x -R ./entry_scripts
 
 EXPOSE 8888
-ENTRYPOINT ["/bin/sh", "-c", "/src/entry_scripts/development.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "/revo/entry_scripts/development.sh"]

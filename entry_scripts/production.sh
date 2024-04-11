@@ -1,1 +1,1 @@
-cd /src/python_code/modules && python3 main.py
+cd /revo/modules && python3 main.py
