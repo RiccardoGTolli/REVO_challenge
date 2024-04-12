@@ -9,11 +9,16 @@ services:
       context: ./
       dockerfile: ./revo/Dockerfile
       target: development
+    environment:
+      - UID=$UID
+      - GID=$GID
     tty: true # docker run -t
     stdin_open: true # docker run -i
     volumes:
       - ./revo/modules/:/revo/modules
       - ./revo/notebooks/:/revo/notebooks/
+      - ./revo/data/:/revo/data/
+      - ./revo/data_modified/:/revo/data_modified/
     ports:
       - $JUPYTER_PORT_APP:8888
     env_file:

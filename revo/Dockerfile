@@ -2,6 +2,12 @@ FROM python:3.9-slim-buster as production
 
 USER root
 
+ARG UID=1001
+ARG GID=1002
+
+ENV UID=1001
+ENV GID=1002
+
 # Install some basic packages
 RUN apt-get update && apt-get install -y \
     gcc python3-dev \
@@ -12,6 +18,7 @@ WORKDIR /revo
 ENV PYTHONPATH="${PYTHONPATH}:/revo/"
 
 COPY ./revo/data /revo/data
+COPY ./revo/data_modified /revo/data_modified
 COPY ./revo/dimension /revo/dimension
 COPY ./revo/modules /revo/modules
 COPY ./revo/requirements.txt /revo/requirements.txt 
