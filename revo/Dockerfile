@@ -21,6 +21,7 @@ COPY ./revo/data /revo/data
 COPY ./revo/data_modified /revo/data_modified
 COPY ./revo/dimension /revo/dimension
 COPY ./revo/modules /revo/modules
+COPY ./revo/output /revo/output
 COPY ./revo/requirements.txt /revo/requirements.txt 
 
 RUN pip install --upgrade pip

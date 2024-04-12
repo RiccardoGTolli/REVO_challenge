@@ -19,22 +19,8 @@ services:
       - ./revo/notebooks/:/revo/notebooks/
       - ./revo/data/:/revo/data/
       - ./revo/data_modified/:/revo/data_modified/
+      - ./revo/output/:/revo/output/
     ports:
       - $JUPYTER_PORT_APP:8888
     env_file:
       - ./.env
-
-  relationaldb:
-      image: mcr.microsoft.com/mssql/server:2019-latest
-      restart: always
-      environment:
-        - MSSQL_USER=$MSSQL_USER
-        - SA_PASSWORD=$SA_PASSWORD
-        - ACCEPT_EULA=Y
-      ports:
-        - 1433:1433
-      volumes: 
-        - relationaldb:/var/lib/mssql/data
-
-volumes:
-  relationaldb:
