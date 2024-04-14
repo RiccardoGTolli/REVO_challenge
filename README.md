@@ -41,20 +41,27 @@ Once the container is running (with docker compose up) you can gain access to th
 docker compose exec revo bash
 ```
 
-## Run the app from start to finish in production mode
+## Run the app from start to finish
 
-Build the image in production mode i.e. change the target: production in the docker-compose.yml
+Method 1:
+Build and run the image in production mode i.e., in the docker-compose.yml, have: 'target: production'
 ```bash
 docker compose up --build -d
 ```
-This will:
-1. Execute the entry script: ./entry_scripts/production.sh
-2. The entry script will execute: which
-3. Then...
 
+Method 2: Gain access to container shell and execute main.py manually.
+With 'target: development': 
+```bash
+docker compose up --build -d
+docker compose exec revo bash
 ```
-
+Then execute main.py manually:
+```bash
+python3 modules/main.py --config modules/config.json
+```
+You can play with the arguments in config.json to obtain different model accuracy and change the start and end period. Simply change the values in config.json and rerun the app.
 ## Formatting, linters and static-checks (just for development purposes)
 
 From inside container, run `format` and `code-checks`.
 
+## Description of the app

@@ -1,6 +1,4 @@
 {
-"start_year": "2025-01-01",
-"features": [
-    "AssetNo"
-]
+"na_row_threshold": 0.7,
+"IQR_multiplier": 4,
 }

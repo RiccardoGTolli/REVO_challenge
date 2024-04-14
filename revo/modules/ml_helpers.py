@@ -1,29 +1,23 @@
 import argparse
 import json
+import pandas as pd
 
-def select_config_file_set():
+def select_config_file():
     parser = argparse.ArgumentParser(description="Select the config file and config set.")
     parser.add_argument(
         "--config-file",
         type=str,
-        default="train_config_1.json",
-        help="Values are like: train_config_1.json",
-    )
-    parser.add_argument(
-        "--config-set",
-        type=str,
-        default="NGB_1",
-        help="Values are like: Values are like: NGB_1.",
+        default="config.json",
+        help="Pass a config file like: config.json",
     )
     args = parser.parse_args()
 
     return args
 
 
-def get_config_from_file(config_file, config_set):
+def get_config_from_file(config_file):
     with open(config_file, "r") as file:
-        all_configs = json.load(file)
-        config = all_configs[config_set]
+        config = json.load(file)
     return config
 
 
@@ -57,3 +51,28 @@ def remove_outliers_iqr(df,IQR_multiplier):
         df_no_outliers[column] = df[column].mask((df[column] < lower_bound) | (df[column] > upper_bound), other=None)
     
     return df_no_outliers
+
+def get_year_quarter_combos(start_year,start_quarter,
+                            end_year,end_quarter):
+    ''' Will return a dataframe that can be used to inner join df
+    so that you can filter the df based on year and quarter.
+    '''
+    all_combos=[]
+    for year in range(start_year,end_year+1):
+        if year==start_year:
+            for quarter in range(start_quarter,5):
+                combo=(year,quarter)
+                all_combos.append(combo)
+        elif year!=start_year and year<end_year:
+            for quarter in range(1,5):
+                combo=(year,quarter)
+                all_combos.append(combo)
+        elif year==end_year:
+            for quarter in range(1,end_quarter+1):
+                combo=(year,quarter)
+                all_combos.append(combo)
+                
+    # Convert the list of tuples to a DataFrame
+    filter_df = pd.DataFrame(all_combos, columns=['Year', 'Quarter'])
+    
+    return filter_df
