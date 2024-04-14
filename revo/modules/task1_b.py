@@ -9,6 +9,7 @@ from ml_helpers import get_year_quarter_combos,plot_lin_reg_scatter
 def task1_b(start_year:int,start_quarter:int,
             end_year:int,end_quarter:int,
             pvalue:float=0.05):
+    
     # Import cleaned data
     df=pd.read_csv('output/0_clean_arff/df_task1.csv')
     # Remove rows without sector
@@ -72,9 +73,9 @@ def task1_b(start_year:int,start_quarter:int,
     task1_b_answer=pd.DataFrame({task1_b_answer.index.name:task1_b_answer.index.values,
                              'Rank':task1_b_answer}).reset_index(drop=True)
     
-    # Save the task1_a_answer
-    task1_b_answer.to_csv('output/3_task1_b/df_task1_answer.csv',index=False)
-    # The plots for each column are in revo/output/task1_b_answers
+    # Save the task1_b_answer
+    task1_b_answer.to_csv('output/3_task1_b/df_task1_b_result.csv',index=False)
+    # The plots for each column are in revo/output/task1_b
     
     # Produce plots
     for financial_col,sector in zip(all_sectors_df['Statistical Significant Financial Indicator'],
@@ -96,3 +97,4 @@ def task1_b(start_year:int,start_quarter:int,
         ]['p-value'].iloc[0]
         
         plot_lin_reg_scatter(filtered_df,financial_col,coeff,pvalue,'3_task1_b')
+        

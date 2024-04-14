@@ -110,7 +110,8 @@ class Dataset():
         
         return df
         
-    def output_task1_and_task2_data(self,df,sector:pd.DataFrame,na_row_threshold:float=0.7,
+    def output_task1_and_task2_data(self,df,sector:pd.DataFrame,knn_neighbors,
+                                    na_row_threshold:float=0.7,
                                     IQR_multiplier:float=4)->None:
         '''Cleaning step to the entire dataframe.
         na_row_threshold is the percentage where if a row has more than that many null values,
@@ -172,7 +173,7 @@ class Dataset():
         # Inpute missing data with interpolation as it is time series data
         df[cols] = df[cols].interpolate(method='linear')
         # Inpute the remaining missing values (due to missing from the start or from the end of df)
-        imputer = KNNImputer(n_neighbors=5)
+        imputer = KNNImputer(n_neighbors=knn_neighbors)
         df[cols] = imputer.fit_transform(df[cols])
         
         # As we are going to use linear regression, let s normalize the data

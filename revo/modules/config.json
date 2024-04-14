@@ -6,5 +6,6 @@
 "end_year": 2020,
 "end_quarter": 2,
 "pvalue":0.05,
-"reset_output":true
+"reset_output":true,
+"knn_neighbors":5
 }

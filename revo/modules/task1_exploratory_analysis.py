@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def task1_exploratory_analysis():
+    
     # Import cleaned data
     df=pd.read_csv('output/0_clean_arff/df_task1.csv')
     
@@ -46,3 +47,4 @@ def task1_exploratory_analysis():
     plt.savefig('output/1_task1_exploratory_analysis/Line plot grouped by sector.png')
     
     print('\n\nExploratory analysis plots saved in output/1_task1_exploratory_analysis')
+    

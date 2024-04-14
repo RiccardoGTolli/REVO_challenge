@@ -8,6 +8,7 @@ from ml_helpers import get_year_quarter_combos,plot_lin_reg_scatter
 def task1_a(start_year:int,start_quarter:int,
             end_year:int,end_quarter:int,
             pvalue:float=0.05):
+    
     # Import cleaned data
     df=pd.read_csv('output/0_clean_arff/df_task1.csv')
     
@@ -56,5 +57,6 @@ def task1_a(start_year:int,start_quarter:int,
                                    'slope':coefficients_list}).sort_values(['slope'],ascending=False
                                                                            ).reset_index(drop=True)
     # Save the task1_a_answer
-    task1_a_answer.to_csv('output/2_task1_a/df_task1_answer.csv',index=False)
-    # The plots for each column are in revo/output/task1_a_answers 
+    task1_a_answer.to_csv('output/2_task1_a/df_task1_a_result.csv',index=False)
+    # The plots for each column are in revo/output/task1_a 
+    
