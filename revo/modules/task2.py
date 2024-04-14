@@ -12,15 +12,16 @@ import xgboost as xgb
 import lightgbm as lgb
 
 from ml_helpers import remove_outliers_iqr
+from typing import Tuple, List
 
 
 
 class classificator_model(ABC):
 
-    def ml_preprocessing(self,IQR_multiplier, knn_neighbors,
-                         test_size_percentage,
+    def ml_preprocessing(self,IQR_multiplier:float, knn_neighbors:int,
+                         test_size_percentage:float,
                          df_path:str='output/0_clean_arff/df_task2.csv'
-                         )->pd.DataFrame:
+                         )->Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, List[str]]:
         # Import cleaned data
         df=pd.read_csv('output/0_clean_arff/df_task2.csv')
         
@@ -63,7 +64,10 @@ class classificator_model(ABC):
 
 class RandomForest(classificator_model):
    
-    def train_and_return_accuracy(self,X_train,y_train,X_test,y_test,labels_list)->None:
+    def train_and_return_accuracy(self,X_train:pd.DataFrame,X_test:pd.DataFrame,
+                                  y_train:pd.Series,y_test:pd.Series,
+                                  labels_list:List[str])->None:
+        
         # Initialize and train the Random Forest Classifier
         clf = RandomForestClassifier(n_estimators=100, random_state=42)
         clf.fit(X_train, y_train)
@@ -82,14 +86,47 @@ class RandomForest(classificator_model):
     
 class LightGBM(classificator_model):
     
-    def train_and_return_accuracy(self,df:pd.DataFrame='output/0_clean_arff/df_task2.csv')->None:
-        pass   
+    def train_and_return_accuracy(self,X_train:pd.DataFrame,X_test:pd.DataFrame,
+                                  y_train:pd.Series,y_test:pd.Series,
+                                  labels_list:List[str])->None:
+        
+        # Initialize and train the LightGBM Classifier
+        clf = lgb.LGBMClassifier(num_class=6, random_state=42,force_col_wise=True)
+        clf.fit(X_train, y_train)
+
+        # Predict on the test set
+        y_pred = clf.predict(X_test)
+
+        # Calculate accuracy
+        accuracy = accuracy_score(y_test, y_pred)
+        print(f'Accuracy: {accuracy:.2f}')
+
+        # Classification report
+        print(classification_report(y_test, y_pred,target_names=labels_list))
+
+   
 
 
 class XGBoost(classificator_model):  
     
-    def train_and_return_accuracy(self,df:pd.DataFrame='output/0_clean_arff/df_task2.csv')->None:
-        pass   
+    def train_and_return_accuracy(self,X_train:pd.DataFrame,X_test:pd.DataFrame,
+                                  y_train:pd.Series,y_test:pd.Series,
+                                  labels_list:List[str])->None:
+        
+        # Initialize and train the XGBoost Classifier
+        clf = xgb.XGBClassifier(objective='multi:softmax', num_class=6, random_state=42)
+        clf.fit(X_train, y_train)
+
+        # Predict on the test set
+        y_pred = clf.predict(X_test)
+
+        # Calculate accuracy
+        accuracy = accuracy_score(y_test, y_pred)
+        print(f'Accuracy: {accuracy:.2f}')
+
+        # Classification report
+        print(classification_report(y_test, y_pred,target_names=labels_list))
+   
 
 
 
