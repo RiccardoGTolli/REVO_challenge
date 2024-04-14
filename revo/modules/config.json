@@ -7,5 +7,6 @@
 "end_quarter": 2,
 "pvalue":0.05,
 "reset_output":true,
-"knn_neighbors":5
+"knn_neighbors":5,
+"test_size_percentage":0.2
 }

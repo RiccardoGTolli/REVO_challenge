@@ -18,7 +18,8 @@ from ml_helpers import remove_outliers_iqr
 class classificator_model(ABC):
 
     def ml_preprocessing(self,IQR_multiplier, knn_neighbors,
-                         df_path:str='output/0_clean_arff/df_task2.csv',
+                         test_size_percentage,
+                         df_path:str='output/0_clean_arff/df_task2.csv'
                          )->pd.DataFrame:
         # Import cleaned data
         df=pd.read_csv('output/0_clean_arff/df_task2.csv')
@@ -29,9 +30,6 @@ class classificator_model(ABC):
         
         # Change the code_sector to work with certain ml functions below
         df['code_sector'] = (df['code_sector'] - 1).astype(int)
-        
-        X_cols=df[['code_sector']].columns
-        Y_cols=df.drop(['code_sector'],axis=1).columns
         
         # Split dataset into train-test
         X = df.drop(columns=['code_sector'])
@@ -51,6 +49,11 @@ class classificator_model(ABC):
         imputer = KNNImputer(n_neighbors=knn_neighbors)
         X_train = imputer.fit_transform(X_train)
         X_test = imputer.fit_transform(X_test)
+        
+        # For more comprehensible output
+        labels_list=['Transportation and warehousing','Wholesale trade','Manufacturing','Retail trade','Energy','Construction']
+        
+        return X_train,X_test,y_train,y_test,labels_list
 
 
     @abstractmethod
@@ -60,8 +63,21 @@ class classificator_model(ABC):
 
 class RandomForest(classificator_model):
    
-    def train_and_return_accuracy(self,df:pd.DataFrame='output/0_clean_arff/df_task2.csv')->None:
-        pass   
+    def train_and_return_accuracy(self,X_train,y_train,X_test,y_test,labels_list)->None:
+        # Initialize and train the Random Forest Classifier
+        clf = RandomForestClassifier(n_estimators=100, random_state=42)
+        clf.fit(X_train, y_train)
+
+        # Predict on the test set
+        y_pred = clf.predict(X_test)
+
+        # Calculate accuracy
+        accuracy = accuracy_score(y_test, y_pred)
+        print(f'Accuracy: {accuracy:.2f}')
+
+        # Classification report
+        print(classification_report(y_test, y_pred,target_names=labels_list))
+  
     
     
 class LightGBM(classificator_model):
