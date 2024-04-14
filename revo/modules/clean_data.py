@@ -80,7 +80,7 @@ class Dataset():
             with open(f'{self.data_modified_path}{filename}', 'w') as wf:
                 wf.writelines(lines)
 
-    def import_clean_arff_to_df(self)->pd.DataFrame:
+    def import_clean_arff_to_df(self,dimension:pd.DataFrame)->pd.DataFrame:
         '''Imports the cleaned up arff files from data_modified and puts them in a single df.'''
         
         # Initialize an empty list to store DataFrames
@@ -94,7 +94,7 @@ class Dataset():
                 df = pd.DataFrame(raw_data['data'],columns=[x[0] for x in raw_data['attributes']])
                 
                 # Create a dict with the mappings
-                mappings = dict(zip(self.dimension['Variable Name'], self.dimension['Description']))
+                mappings = dict(zip(dimension['Variable Name'], dimension['Description']))
                 # Rename columns in df using the mapping
                 df.rename(columns=mappings,inplace=True)
 
@@ -108,7 +108,9 @@ class Dataset():
         # Concatenate all DataFrames in the list
         df = pd.concat(dfs_list, ignore_index=True)
         
-    def output_task1_and_task2_data(self,df,na_row_threshold:float=0.7,
+        return df
+        
+    def output_task1_and_task2_data(self,df,sector:pd.DataFrame,na_row_threshold:float=0.7,
                                     IQR_multiplier:float=4)->None:
         '''Cleaning step to the entire dataframe.
         na_row_threshold is the percentage where if a row has more than that many null values,
@@ -130,7 +132,7 @@ class Dataset():
         df=df.dropna(thresh=threshold).reset_index(drop=True)
         
         # Get the sector mapping in, we choose inner to get rid of a sector=0 row
-        df=df.merge(self.sector,how='inner', left_on='sectors', right_on='code_sector').drop(['sectors'],axis=1)
+        df=df.merge(sector,how='inner', left_on='sectors', right_on='code_sector').drop(['sectors'],axis=1)
         
         # Extract numeric part from 'Quarter' column and convert to float
         df['Quarter'] = df['Quarter'].str.extract('(\d+)').astype(float)
@@ -158,7 +160,8 @@ class Dataset():
             
         # To prevent leakage, we will output the data for task2 before any outlier and 
         # missing data inputing technique
-        df.to_csv('output/0. cleaned_data/df_task2.csv',index=False)
+        df.to_csv('output/0_clean_arff/df_task2.csv',index=False)
+        print('\n Exported df_task2.csv in output/0_clean_arff')
 
         # Continuing for task1 data
         # I dont know if this makes financial sense but ,I will remove massive outliers because they seem off           
@@ -178,4 +181,5 @@ class Dataset():
         df[cols] = scaler.fit_transform(df[cols])
         
         # Save the df_task1
-        df.to_csv('output/0. cleaned_data/df_task1.csv',index=False)
+        df.to_csv('output/0_clean_arff/df_task1.csv',index=False)
+        print('\n Exported df_task1.csv in output/0_clean_arff')

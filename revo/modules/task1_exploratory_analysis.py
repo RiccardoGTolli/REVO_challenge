@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def task1_exploratory_analysis():
     # Import cleaned data
-    df=pd.read_csv('output/0. cleaned_data/df_task1.csv')
+    df=pd.read_csv('output/0_clean_arff/df_task1.csv')
     
     # Line plot grouped by country
 
@@ -23,7 +23,7 @@ def task1_exploratory_analysis():
     # Show plot
     plt.show()
     # Save the plot to a file
-    plt.savefig('output/1. task1_exploratory_analysis/Line plot grouped by country.png')
+    plt.savefig('output/1_task1_exploratory_analysis/Line plot grouped by country.png')
 
     # Line plot grouped by sector
 
@@ -43,6 +43,6 @@ def task1_exploratory_analysis():
     # Show plot
     plt.show()
     # Save the plot to a file
-    plt.savefig('output/1. task1_exploratory_analysis/Line plot grouped by sector.png')
+    plt.savefig('output/1_task1_exploratory_analysis/Line plot grouped by sector.png')
     
-    print('Exploratory analysis plots saved in output/1. task1_exploratory_analysis')
+    print('\n\nExploratory analysis plots saved in output/1_task1_exploratory_analysis')

@@ -1,4 +1,10 @@
 {
 "na_row_threshold": 0.7,
 "IQR_multiplier": 4,
+"start_year": 2019,
+"start_quarter": 4,
+"end_year": 2020,
+"end_quarter": 2,
+"pvalue":0.05,
+"reset_output":true
 }
