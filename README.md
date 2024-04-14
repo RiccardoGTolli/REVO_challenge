@@ -33,39 +33,28 @@ method 2: Within the IDE e.g. VsCode
   http://localhost:8888/?token=<your_token>
 - Type a name, the default 'localhost' is fine
 - Select Python 3 (ipykernel)
+  
+## Gain access to container shell
+Once the container is running (with docker compose up) you can gain access to the container shell with:
 
+```bash
+docker compose exec revo bash
+```
 
+## Run the app from start to finish in production mode
 
-## Import data
-
-Import data into the mssql database using the following commands.
-
+Build the image in production mode i.e. change the target: production in the docker-compose.yml
 ```bash
 docker compose up --build -d
-docker compose exec app bash
+```
+This will:
+1. Execute the entry script: ./entry_scripts/production.sh
+2. The entry script will execute: which
+3. Then...
+
 ```
 
-From inside container, run command below to import all data
+## Formatting, linters and static-checks (just for development purposes)
 
-```bash
-python3 code/import_data.py all
-```
+From inside container, run `format` and `code-checks`.
 
-## Train a model
-
-From inside container, run command below to train NGB_1 using parameters from a config file:
-
-```bash
-python3 code/train_asset.py --config-file code/train_config_1.json --config-set ngb_asset
-python3 code/train_sample.py --config-file code/train_config_1.json --config-set ngb_sample
-```
-
-
-This file will run train.py with the arguments from a config file (e.g.train_config_1.json).
-- You can change the values train_config_1.json, config_set_1 to change the config file or the config set.
-- You can also change the parameters in train_config_1.json to run train.py with different parameters.
-
-
-## Format code
-
-From inside container, run `format` and `code-checks` before submitting a PR
