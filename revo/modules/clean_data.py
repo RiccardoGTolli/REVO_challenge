@@ -162,7 +162,7 @@ class Dataset():
         # To prevent leakage, we will output the data for task2 before any outlier and 
         # missing data inputing technique
         df.to_csv('output/0_clean_arff/df_task2.csv',index=False)
-        print('\n Exported df_task2.csv in output/0_clean_arff')
+        print('\nExported df_task2.csv in output/0_clean_arff')
 
         # Continuing for task1 data
         # I dont know if this makes financial sense but ,I will remove massive outliers because they seem off           
@@ -183,4 +183,4 @@ class Dataset():
         
         # Save the df_task1
         df.to_csv('output/0_clean_arff/df_task1.csv',index=False)
-        print('\n Exported df_task1.csv in output/0_clean_arff')
+        print('\nExported df_task1.csv in output/0_clean_arff')

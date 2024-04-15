@@ -130,7 +130,7 @@ def plot_lin_reg_scatter(df:pd.DataFrame,col:str,
     # Reset the current figure
     plt.clf()
     
-    print(f'\nStatistically significant plot saved in output/{dir}/{col_no_slashes}.png')
+    print(f'Statistically significant plot saved in output/{dir}/{col_no_slashes}.png')
     
     
 def delete_files_in_folder_recursively(folder_path:str)->None:

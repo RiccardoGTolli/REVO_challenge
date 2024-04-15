@@ -74,10 +74,8 @@ You can run the test like so:
 - The notebooks and the modules do the same thing, except that the modules (main.py) has a few extra features:
     1. config.json, this allows you to change the parameters to obtain different results for example hyperparameter selection for improved performance or change the start and end period.
     Look at sample_config.json to understand what kind of parameters can be put in the config.json.
-
-    2. Stepwise regression (i.e. the model autoselects which features to drop to improve performance)
    
-    3. For task 2 the notebooks simply print the correlation matrix while the modules save the best result matrix to output/4_task2
+    2. For task 2 the notebooks simply print the correlation matrix while the modules save the best result matrix to output/4_task2
 
 - How the tasks were tackled:
   0. Cleaning the data:

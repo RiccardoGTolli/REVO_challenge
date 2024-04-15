@@ -46,5 +46,5 @@ def task1_exploratory_analysis():
     # Save the plot to a file
     plt.savefig('output/1_task1_exploratory_analysis/Line plot grouped by sector.png')
     
-    print('\n\nExploratory analysis plots saved in output/1_task1_exploratory_analysis')
+    print('\nExploratory analysis plots saved in output/1_task1_exploratory_analysis')
     
