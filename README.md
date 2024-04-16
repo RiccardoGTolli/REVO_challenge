@@ -66,8 +66,10 @@ From inside container, run `format` and `code-checks`.
 
 ## Unit Testing
 
-This has been done just for illustrative purposes, only a single function was unit tested.
+This has been done just for illustrative purposes, only a single function was unit tested: `ml_helpers.get_year_quarter_combos`.
 You can run the test like so:
+1. Gain access to the container CLI: `docker compose exec revo bash`
+2. Then execute the test with : `python3 modules/test_ml_helpers.py`
 
 ## Description of the app
 

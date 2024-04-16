@@ -6,4 +6,4 @@ mypy==1.5.1
 types-requests
 
 # jupyter notebooks (dev only)
-jupyterlab
+jupyterlab 

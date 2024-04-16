@@ -111,7 +111,7 @@ class Dataset():
         return df
         
     def output_task1_and_task2_data(self,df,sector:pd.DataFrame,knn_neighbors,
-                                    na_row_threshold:float=0.7,
+                                    mi_cols:bool,na_row_threshold:float=0.7,
                                     IQR_multiplier:float=4)->None:
         '''Cleaning step to the entire dataframe.
         na_row_threshold is the percentage where if a row has more than that many null values,
@@ -155,10 +155,11 @@ class Dataset():
         df['cos_quarter'] = np.cos(2 * np.pi * df['Quarter'] / period)
 
         # Create missing indicator columns
-        for col in cols:
-            missing_indicator_col_name = 'MI_'+col
-            df[missing_indicator_col_name] = df[col].isnull().astype(int)
-            
+        if mi_cols is True:
+            for col in cols:
+                missing_indicator_col_name = 'MI_'+col
+                df[missing_indicator_col_name] = df[col].isnull().astype(int)
+                
         # To prevent leakage, we will output the data for task2 before any outlier and 
         # missing data inputing technique
         df.to_csv('output/0_clean_arff/df_task2.csv',index=False)
