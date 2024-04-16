@@ -71,43 +71,42 @@ You can run the test like so:
 
 ## Description of the app
 
-- The notebooks and the modules do the same thing, except that the modules (main.py) has a few extra features:
-    1. config.json, this allows you to change the parameters to obtain different results for example hyperparameter selection for improved performance or change the start and end period.
-    Look at sample_config.json to understand what kind of parameters can be put in the config.json.
-   
-    2. For task 2 the notebooks simply print the correlation matrix while the modules save the best result matrix to output/4_task2
+<div style="background-color: #1a1c1f; padding: 10px;">
 
-- How the tasks were tackled:
-  0. Cleaning the data:
-          The data is stored in .arff files, this severely limits the possibilities on python to use well established libraries such as pandas, therefore a few ad-hoc cleaning steps have been applied to clean the files by treating them as text files.
+#### The notebooks and the modules do the same thing, except that the modules (main.py) has a few extra features:
+1. config.json, this allows you to change the parameters to obtain different results for example hyperparameter selection for improved performance or change the start and end period.
+Look at sample_config.json to understand what kind of parameters can be put in the config.json.
 
-          After cleaning, the .arff files are put into a single pandas DataFrame and we do common cleaning procedures such as handle missings, encode variables, remove outliers, missing indicator and inputation.
+1. For task 2 the notebooks simply print the correlation matrix while the modules save the best result matrix to output/4_task2
+ </div>
 
-          The file that does this is clean_data.py, it creates 'output/0_cleaned_data/df_task1.csv' 'output/0_cleaned_data/df_task2.csv'; the difference between the two files is that the latter is used for a classification problem so it s lacking some preprocessing steps that will be applied to train and test separately to avoid data leakage.
+&nbsp;
 
-  1. Exploratory Analysis:
-          The file that does this step is task1_exploratory_analysis.py.
-          
-          The output is simply two plots, the first is a time series line plot grouped by country, saved in 'output/1_task1_exploratory_analysis/Line plot grouped by country.png'; the second plot is a time series line plot grouped by sector, saved in 'output/1_task1_exploratory_analysis/Line plot grouped by sector.png'.
+<div style="background-color: #1a1c1f; padding: 10px;">
 
-  2. Find the financial indicators that statistically changed between 2019 Q4 and 2020 Q2:
-          The timeframe can actually be decided before any run by simply using these fields in the config.json: start_year, start_quarter, end_year, end_quarter.
+#### How the tasks were tackled:
 
-          We run a linear regression using Year and Quarter as x variables and a single financial indicator as y variable; therefore we run a model for each financial indicator.
-          
-          Quarter has been trigonometrically encoded to preserve its cyclical nature, therefore it has been split in sin_quarter and cos_quarter.
+1.  Cleaning the data:
+    1. The data is stored in .arff files, this severely limits the possibilities on python to use well established libraries such as pandas, therefore a few ad-hoc cleaning steps have been applied to clean the files by treating them as text files.
+    2. After cleaning, the .arff files are put into a single pandas DataFrame and we do common cleaning procedures such as handle missings, encode variables, remove outliers, missing indicator and inputation.
+    3. The file that does this is clean_data.py, it creates 'output/0_cleaned_data/df_task1.csv' 'output/0_cleaned_data/df_task2.csv'; the difference between the two files is that the latter is used for a classification problem so it s lacking some preprocessing steps that will be applied to train and test separately to avoid data leakage.
 
-          Using the average of the coefficients and pvalues for Year and Quarter we determine the indicators whose change is statistically significant.
+2. Exploratory Analysis:
+   1. The file that does this step is task1_exploratory_analysis.py.
+   2. The output is simply two plots, the first is a time series line plot grouped by country, saved in 'output/1_task1_exploratory_analysis/Line plot grouped by country.png'; the second plot is a time series line plot grouped by sector, saved in 'output/1_task1_exploratory_analysis/Line plot grouped by sector.png'.
 
-          The financial indicators that satisfy the pvalue requirement (which can be changed in config) are saved in 'output/2_task1_a/df_task1_a_result.csv' , you will also find plots for each feature in 'output/2_task1_a/'
+3. Find the financial indicators that statistically changed between 2019 Q4 and 2020 Q2:
+   1. The timeframe can actually be decided before any run by simply using these fields in the config.json: start_year, start_quarter, end_year, end_quarter.
+   2. We run a linear regression using Year and Quarter as x variables and a single financial indicator as y variable; therefore we run a model for each financial indicator.
+   3. Quarter has been trigonometrically encoded to preserve its cyclical nature, therefore it has been split in sin_quarter and cos_quarter.
+   4. Using the average of the coefficients and pvalues for Year and Quarter we determine the indicators whose change is statistically significant.
+   5. The financial indicators that satisfy the pvalue requirement (which can be changed in config) are saved in 'output/2_task1_a/df_task1_a_result.csv' , you will also find plots for each feature in 'output/2_task1_a/'
 
-  3. Find, for each sector, the financial indicators that statistically changed between 2019 Q4 and 2020 Q2. . Rank these financial indicators based on the number of sectors in which they significantly changed:
-          This is the same concept as task1_a but we are grouping the data by country.
-          You can find a ranking of statistically significant indicators by Country in 'output/3_task1_b/df_task1_b_result.csv'; while the plots are in 'output/3_task1_b/'
+4. Find, for each sector, the financial indicators that statistically changed between 2019 Q4 and 2020 Q2. Rank these financial indicators based on the number of sectors in which they significantly changed:
+   1. This is the same concept as task1_a but we are grouping the data by country.
+   2. You can find a ranking of statistically significant indicators by Country in 'output/3_task1_b/df_task1_b_result.csv'; while the plots are in 'output/3_task1_b/'
 
-  4.  Implement a classification machine learning algorithm to predict the sector of the companies:
-      Data is prepared for supervised learning, split in train and test,  three models are applied on it: Random Forest, LightGBM and XGBoost.
-      
-      Hyperparameters can be changed in the config.json, look at sample_config.son to get ideas on which parameters to use. You can use the parameter step_wise_regression:true to only keep features that are improving the model, however this can take some time.
-
-      The best model`s correlation matrix will be output in 'output/4_task2', best model is chosen according to the metric Accuracy.
+5. Implement a classification machine learning algorithm to predict the sector of the companies:
+   1. Data is prepared for supervised learning, split in train and test,  three models are applied on it: Random Forest, LightGBM and XGBoost.
+   2. Hyperparameters can be changed in the config.json, look at sample_config.son to get ideas on which parameters to use. You can use the parameter step_wise_regression:true to only keep features that are improving the model, however this can take some time.
+   3. The best model`s correlation matrix will be output in 'output/4_task2', best model is chosen according to the metric Accuracy.
