@@ -37,6 +37,8 @@ def task1_b(start_year:int,start_quarter:int,
 
         # Fit a multiple linear regression model to each financial col
         for financial_col in Y_cols: 
+            if financial_col.startswith("MI_"):
+                continue  # Skip to the next iteration if the col is a missing indicator
             # Add a constant term and combine the 3 x variables into one array
             X = sm.add_constant(list(zip(sector_df['Year'], sector_df['sin_quarter'], sector_df['cos_quarter'])))  
             model = sm.OLS(sector_df[financial_col], X).fit()
@@ -80,6 +82,9 @@ def task1_b(start_year:int,start_quarter:int,
     # Produce plots
     for financial_col,sector in zip(all_sectors_df['Statistical Significant Financial Indicator'],
                                     all_sectors_df['description_sector']):
+        
+        if financial_col.startswith("MI_"):
+            continue  # Skip to the next iteration if the col is a missing indicator
         
         filtered_df=df[df['description_sector']==sector].copy()
         filtered_df=filtered_df[[financial_col,f'Predicted {financial_col}',

@@ -1,39 +1,5 @@
 Statistical Significant Financial Indicator,p-value,slope
-MI_Net cash flow(n)/net cash flow (n−1),3.655168238739425e-08,0.1349443565287873
-MI_Net cash flow from (used in) operating activities (n)/Net cash flow from (used in) operating activities (n−1),1.5909049492534834e-07,0.13347449759327398
-MI_Sales revenues (n)/sales revenues (n−1),0.0011397172753248273,0.09321145218342747
-MI_Total sales revenue (n)/total sales revenues (n−1),0.0027047663342200583,0.08240929063164189
-Profit on sales/sales revenues,0.008806238191603893,0.07552935282424038
-Sales revenues/receivables,0.041548317586658036,0.058099554103191516
-Profit on sales/total assets,0.026447417688918635,0.057583310734263454
-Sales revenues/short-term liabilities,0.022024107351235278,0.04345169763684605
-Market capitalization to EBIT,0.029328230652314626,0.026823440217829536
-Market capitalization/book value,4.752413296059819e-06,0.011766892475996235
-MI_EBITDA */sales revenues,9.90685474061357e-08,0.007598376852296367
-Market capitalization/gross profit,0.02545852619214353,0.004128329985862693
-Market capitalization to total assets,7.12195716566089e-07,0.0039835422291823646
-MI_Net cash flow from (used in) operating activities/income,1.1978436096426359e-09,0.0032124114023066954
-MI_(Gross profit + depreciation)/sales revenues,1.1978436096426359e-09,0.0032124114023066954
-MI_(Total liabilities-cash)/sales revenues,4.4829038789026917e-10,0.0023352183123087574
-MI_Profit on sales/sales revenues,4.4829038789026917e-10,0.0023352183123087574
-MI_EBIT/sales revenues,4.4829038789026917e-10,0.0023352183123087574
-MI_Gross profit/sales revenues,4.4829038789026917e-10,0.0023352183123087574
-MI_Net profit/sales revenues,4.4829038789026917e-10,0.0023352183123087574
-MI_Net cash flow from (used in) operating activities/EBIT,1.0395566096375035e-09,0.002048321967023911
-MI_(Current assets-inventory-short-term liabilities)/(total operating revenues-profit before income tax-depreciation),1.3492679984404312e-11,0.00089571515081599
-MI_Market capitalization to EBIT,9.704515697277977e-10,-0.0005947399220447477
-MI_EBIT/total operating costs,3.219342024249916e-12,-0.001155111638337684
-MI_Market capitalization/gross profit,4.2096439994679796e-12,-0.0017464852470518294
-MI_EBIT/financial expenses,2.068474384516294e-11,-0.004695316636351042
-Market capitalization/capital employed,0.0003013094326346072,-0.018383978332270373
-Net cash flow,0.004548389472850326,-0.025271426726096047
-MI_Market capitalization/EBITDA,2.7011162423223207e-11,-0.04436104747919112
-MI_Yearly dividend/price per share,1.6287291529378747e-47,-0.045451140113483564
-MI_Income/outstanding shares,7.326856321512405e-50,-0.05100054888035538
-MI_Price per share/net profit per share,7.326856321512405e-50,-0.05100054888035538
-MI_Net profit per share,7.326856321512405e-50,-0.05100054888035538
-MI_Depreciation/net cash flow from (used in) operating activities,7.811380980566816e-14,-0.06627960748286481
-MI_Net profit/net cash flow from (used in) operating activities,7.811380980566816e-14,-0.06627960748286481
-MI_Net cash flow,5.475087678679594e-14,-0.06803399366286068
-Depreciation/net cash flow from (used in) operating activities,0.005856813250676739,-0.08608258016359434
-Total assets (n)/total assets (n−1),0.0436093662608017,-0.32072940568795505
+short-term liabilities (n)/short-term liabilities (n−1),0.028632018090280733,0.0695799012602083
+Current assets (n)/current assets (n−1),0.04281925536070607,0.05691807580557332
+Market capitalization/EBITDA,0.011858724366381473,0.028225404088719347
+EBIT/equity,0.0431200968206826,-0.0197482868823456

@@ -1,43 +1,7 @@
 Statistical Significant Financial Indicator,Rank
-MI_Price per share/net profit per share,5
-MI_Income/outstanding shares,5
-MI_Net profit per share,5
-MI_Yearly dividend/price per share,5
-MI_Net cash flow,4
-MI_Market capitalization/gross profit,4
-MI_Net cash flow(n)/net cash flow (n−1),4
-MI_Depreciation/net cash flow from (used in) operating activities,4
-MI_Net profit/net cash flow from (used in) operating activities,4
-MI_EBIT/total operating costs,4
-MI_Market capitalization/EBITDA,4
-MI_Market capitalization to EBIT,4
-MI_(Current assets-inventory-short-term liabilities)/(total operating revenues-profit before income tax-depreciation),4
-MI_Net cash flow from (used in) operating activities/EBIT,4
-MI_(Total liabilities-cash)/sales revenues,4
-MI_Profit on sales/sales revenues,4
-MI_Net cash flow from (used in) operating activities/income,4
-MI_(Gross profit + depreciation)/sales revenues,4
-MI_Net profit/sales revenues,4
-MI_EBIT/sales revenues,4
-MI_Gross profit/sales revenues,4
-MI_Net cash flow from (used in) operating activities (n)/Net cash flow from (used in) operating activities (n−1),4
-MI_EBIT/financial expenses,3
-MI_EBITDA */sales revenues,3
-Market capitalization/book value,2
 Total assets (n)/total assets (n−1),2
-Market capitalization/capital employed,2
-Market capitalization to total assets,2
-Depreciation/net cash flow from (used in) operating activities,2
-Profit on sales/sales revenues,2
-Sales revenues/receivables,1
-Sales/fixed assets,1
-short-term liabilities (n)/short-term liabilities (n−1),1
-Net sales revenue/total assets,1
-Sales revenues/short-term liabilities,1
-MI_Total sales revenue (n)/total sales revenues (n−1),1
-(Net profit + depreciation)/total liabilities,1
 Sales revenues/inventory,1
-MI_Sales revenues (n)/sales revenues (n−1),1
-Net cash flow,1
-Total assets/total liabilities,1
-Book value of equity/total liabilities,1
+Receivables (n)/receivables (n−1),1
+Net profit (n)/net profit (n−1),1
+Market capitalization/EBITDA,1
+Depreciation/net cash flow from (used in) operating activities,1

@@ -29,6 +29,8 @@ def task1_a(start_year:int,start_quarter:int,
 
     # Fit a multiple linear regression model to each financial col
     for financial_col in Y_cols: 
+        if financial_col.startswith("MI_"):
+            continue  # Skip to the next iteration if the col is a missing indicator
         # Add a constant term and combine the 3 x variables into one array
         X = sm.add_constant(list(zip(df['Year'], df['sin_quarter'], df['cos_quarter'])))  
         model = sm.OLS(df[financial_col], X).fit()
