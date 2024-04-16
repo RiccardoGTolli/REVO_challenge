@@ -6,11 +6,8 @@ agent. It includes functions for retrieving environment variables and constants 
 """
 
 import os
-import time
 from pathlib import Path
 from typing import Any, Callable
-
-from loguru import logger
 
 BASE_DIR = Path(__file__).parent.resolve()
 
@@ -34,9 +31,8 @@ def get_env_var(var_name: str, cast_as: Callable = str, default=None, as_list: b
         value = os.environ[var_name]  # if variable is found
     except KeyError as e:  # if variable isnt found
         if default is not None:
-            logger.info(f"Setting {var_name} to default value {default}")
             return default  # return the default value if it has been provided
-        logger.exception(
+        print(
             f"""Environment variable {var_name} is not set
         and no default value was provided.\n Error: {e}"""
         )
@@ -49,7 +45,7 @@ def get_env_var(var_name: str, cast_as: Callable = str, default=None, as_list: b
             return [cast_as(value)]  # return the value in a list
         return cast_as(value)  # if no comma, and as_list is False
     except ValueError as e:
-        logger.exception(
+        print(
             f"""Environment variable {var_name} with value {value}
         could not be cast to {cast_as}.\n Error: {e}"""
         )
@@ -57,9 +53,4 @@ def get_env_var(var_name: str, cast_as: Callable = str, default=None, as_list: b
 
 
 # MSSQL Database
-MSSQL_USERNAME = get_env_var("MSSQL_USERNAME")
-MSSQL_PASSWORD = get_env_var("MSSQL_PASSWORD")
-MSSQL_HOST = get_env_var("MSSQL_HOST")
-MSSQL_PORT = get_env_var("MSSQL_PORT", cast_as=int)
-MSSQL_DATABASE = get_env_var("MSSQL_DATABASE")
-MSSQL_DRIVER = get_env_var("MSSQL_DRIVER")
+JUPYTER_PORT_APP = get_env_var("JUPYTER_PORT_APP", cast_as=int)

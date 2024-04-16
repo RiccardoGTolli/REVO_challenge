@@ -44,10 +44,14 @@ docker compose exec revo bash
 ## Run the app from start to finish
 
 Method 1:
-Build and run the image in production mode i.e., in the docker-compose.yml, have: 'target: production'
+Build and run the image in production mode i.e., in the docker-compose.yml, have: 'target: production'.
+Dont use the flag -d so that you can see the logs.
 ```bash
-docker compose up --build -d
+docker compose up --build
 ```
+Once the image is built, you can just `docker compose up` to re-execute the app.
+For example if you change a parameter in `config.json`, that is part of a volume, so you dont need to rebuild the app.
+
 
 Method 2: Gain access to container shell and execute main.py manually.
 With 'target: development': 

@@ -18,6 +18,7 @@ services:
       - ./revo/modules/:/revo/modules
       - ./revo/notebooks/:/revo/notebooks/
       - ./revo/data/:/revo/data/
+      - ./revo/dimension/:/revo/dimension/
       - ./revo/data_modified/:/revo/data_modified/
       - ./revo/output/:/revo/output/
     ports:

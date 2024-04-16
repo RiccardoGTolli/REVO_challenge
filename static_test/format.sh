@@ -2,7 +2,7 @@
 
 LINE_LENGTH=120
 
-DIRS=(/src/python_code/modules /src/python_code/common_modules)
+DIRS=(modules/)
 
 for DIR in "${DIRS[@]}"; do
     isort --profile black $DIR

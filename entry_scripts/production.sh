@@ -1,1 +1,1 @@
-cd /revo/modules && python3 main.py
+python3 modules/main.py --config modules/config.json

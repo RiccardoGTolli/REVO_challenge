@@ -5,7 +5,7 @@ HIGHLIGHT='\033[0;33m'
 TEXT_RED="\e[31m"
 NC='\033[0m' # No Color
 
-DIRS=(/src/python_code/modules /src/python_code/common_modules) # Directories to apply static checks to
+DIRS=(modules/) # Directories to apply static checks to
 
 for DIR in "${DIRS[@]}"; do # loop over the DIRS
 
@@ -34,7 +34,7 @@ for DIR in "${DIRS[@]}"; do # loop over the DIRS
     fi;
 
     echo -e "${HIGHLIGHT}Running mypy for ${DIR}${NC}"
-    mypy $DIR --config-file /src/static_test/mypy.ini || true
+    mypy $DIR --config-file static_test/mypy.ini || true
 
     if [ $? -ne 0 ]; then
         echo -e "${TEXT_RED}MyPy errors must be resolved for code check to pass ${NC}"

@@ -23,6 +23,7 @@ COPY ./revo/dimension /revo/dimension
 COPY ./revo/modules /revo/modules
 COPY ./revo/output /revo/output
 COPY ./revo/requirements.txt /revo/requirements.txt 
+COPY ./revo/notebooks /revo/notebooks
 
 RUN pip install --upgrade pip
 RUN pip install -r /revo/requirements.txt
@@ -30,23 +31,28 @@ RUN pip install -r /revo/requirements.txt
 COPY ./entry_scripts/production.sh /revo/entry_scripts/production.sh
 RUN chmod +x -R ./entry_scripts
 
-# Show service name in bash prompt
-RUN echo 'PS1="\e[0;31m[revo]\e[m $PS1"' >> /root/.bashrc
 
 ENTRYPOINT ["/bin/sh", "-c", "/revo/entry_scripts/production.sh"]
 
 # Multi-stage build
 FROM production as development
 
-RUN mkdir /revo/notebooks /revo/static_test
-COPY ./revo/notebooks /revo/notebooks
+# Show service name in bash prompt
+RUN echo 'PS1="\e[0;31m[revo]\e[m $PS1"' >> /root/.bashrc
+
+RUN mkdir /revo/static_test
+
 COPY ./revo/requirements_dev.txt /revo/requirements_dev.txt
-COPY ./static_test/bash_aliases.txt /root/.bash_aliases
 COPY ./static_test /revo/static_test
 
 RUN pip install -r /revo/requirements_dev.txt
 COPY ./entry_scripts/development.sh /revo/entry_scripts/development.sh
 RUN chmod +x -R ./entry_scripts
+
+# Copy the .bash_aliases file into the container
+COPY ./static_test/bash_aliases.txt /root/.bash_aliases
+# Append the sourcing command to the .bashrc file (to find the aliases)
+RUN echo "source ~/.bash_aliases" >> /root/.bashrc
 
 EXPOSE 8888
 ENTRYPOINT ["/bin/sh", "-c", "/revo/entry_scripts/development.sh"]
