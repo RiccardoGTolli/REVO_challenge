@@ -109,8 +109,8 @@ Look at `sample_config.json` to understand what kind of parameters can be put in
    5. The financial indicators that satisfy the pvalue requirement (which can be changed in config) are saved in `'output/2_task1_a/df_task1_a_result.csv'` , you will also find plots for each feature in `'output/2_task1_a/'`
 
 4. Find, for each sector, the financial indicators that statistically changed between 2019 Q4 and 2020 Q2. Rank these financial indicators based on the number of sectors in which they significantly changed:
-   1. This is the same concept as task1_a but we are grouping the data by country.
-   2. You can find a ranking of statistically significant indicators by Country in `'output/3_task1_b/df_task1_b_result.csv'`; while the plots are in `'output/3_task1_b/'`
+   1. This is the same concept as task1_a but we are grouping the data by sector.
+   2. You can find a ranking of statistically significant indicators by Sector in `'output/3_task1_b/df_task1_b_result.csv'`; while the plots are in `'output/3_task1_b/'`
 
 5. Implement a classification machine learning algorithm to predict the sector of the companies:
    1. Data is prepared for supervised learning, split in train and test,  three models are applied on it: Random Forest, LightGBM and XGBoost.
